@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaAPI — One API for Top Chinese AI Models</title>
+<meta name="description" content="One unified, OpenAI-compatible API to access DeepSeek, Qwen, GLM, Kimi and MiniMax. Low-cost, global access, pay-as-you-go with PayPal.">
+<style>
+  :root {
+    --bg: #0b0e14;
+    --bg-soft: #11161f;
+    --card: #151b26;
+    --border: #232c3b;
+    --text: #e6eaf2;
+    --text-dim: #9aa5b8;
+    --accent: #4f8cff;
+    --accent-2: #7c5cff;
+    --green: #3ddc97;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(11, 14, 20, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav {
+    max-width: 1080px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand { font-weight: 700; font-size: 18px; letter-spacing: 0.3px; }
+  .brand span { color: var(--accent); }
+  .nav-links { display: flex; gap: 22px; align-items: center; font-size: 14px; }
+  .nav-links a { color: var(--text-dim); }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  .btn {
+    display: inline-block; padding: 9px 20px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; cursor: pointer; border: none;
+    transition: all .15s ease;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #3a76e8; text-decoration: none; }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    max-width: 900px; margin: 0 auto; padding: 90px 24px 60px;
+    text-align: center;
+  }
+  .hero .tag {
+    display: inline-block; font-size: 12.5px; color: var(--accent);
+    border: 1px solid #2b3d63; background: #14213a;
+    padding: 5px 14px; border-radius: 999px; margin-bottom: 22px;
+    letter-spacing: 0.4px;
+  }
+  .hero h1 { font-size: 44px; line-height: 1.2; font-weight: 800; margin-bottom: 18px; }
+  .hero h1 .grad {
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p { font-size: 17px; color: var(--text-dim); max-width: 640px; margin: 0 auto 30px; }
+  .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .hero-models { margin-top: 42px; }
+  .hero-models .label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+  .model-logos { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .model-chip {
+    padding: 8px 18px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--card); font-size: 14px; font-weight: 600;
+  }
+
+  /* ---------- Sections ---------- */
+  section { max-width: 1080px; margin: 0 auto; padding: 64px 24px; }
+  .section-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; text-align: center; }
+  .section-sub { color: var(--text-dim); text-align: center; margin-bottom: 44px; }
+
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+  .feature {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px;
+  }
+  .feature .icon { font-size: 26px; margin-bottom: 12px; }
+  .feature h3 { font-size: 16px; margin-bottom: 8px; }
+  .feature p { font-size: 13.5px; color: var(--text-dim); }
+
+  /* ---------- Pricing ---------- */
+  .pricing-note { text-align: center; color: var(--text-dim); font-size: 13px; margin-bottom: 24px; }
+  table.pricing {
+    width: 100%; max-width: 860px; margin: 0 auto; border-collapse: collapse;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    font-size: 14px;
+  }
+  table.pricing th, table.pricing td { padding: 13px 18px; text-align: left; border-bottom: 1px solid var(--border); }
+  table.pricing th { background: var(--bg-soft); font-size: 13px; color: var(--text-dim); font-weight: 600; }
+  table.pricing tr:last-child td { border-bottom: none; }
+  table.pricing .price { color: var(--green); font-weight: 600; white-space: nowrap; }
+
+  /* ---------- Steps ---------- */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; counter-reset: step; }
+  .step { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; position: relative; }
+  .step .num {
+    width: 32px; height: 32px; border-radius: 50%; background: var(--accent);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px; margin-bottom: 14px;
+  }
+  .step h3 { font-size: 15px; margin-bottom: 8px; }
+  .step p { font-size: 13.5px; color: var(--text-dim); }
+  .step code {
+    background: var(--bg-soft); padding: 2px 6px; border-radius: 5px;
+    font-size: 12.5px; color: var(--accent);
+  }
+
+  /* ---------- FAQ ---------- */
+  details {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 20px; margin-bottom: 12px;
+  }
+  details summary { cursor: pointer; font-weight: 600; font-size: 15px; }
+  details p { margin-top: 10px; color: var(--text-dim); font-size: 14px; }
+
+  /* ---------- Legal ---------- */
+  .legal { max-width: 820px; }
+  .legal h2 { font-size: 20px; margin: 36px 0 12px; }
+  .legal h3 { font-size: 15px; margin: 20px 0 8px; color: var(--text); }
+  .legal p, .legal li { font-size: 14px; color: var(--text-dim); margin-bottom: 8px; }
+  .legal ul { padding-left: 20px; }
+  .legal .updated { font-size: 12.5px; color: #6b7688; margin-bottom: 20px; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 32px 24px;
+    text-align: center; color: var(--text-dim); font-size: 13px;
+  }
+  footer a { color: var(--text-dim); }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 32px; }
+    .nav-links a:not(.btn) { display: none; }
+    table.pricing { font-size: 12.5px; }
+    table.pricing th, table.pricing td { padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="nav">
+    <div class="brand">Nova<span>API</span></div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#quickstart">Quick Start</a>
+      <a href="#faq">FAQ</a>
+      <a href="#terms">Legal</a>
+      <a class="btn btn-primary" href="#quickstart">Get API Key</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <div class="tag">● One API · All Models · Global Access</div>
+  <h1>Top Chinese AI Models.<br><span class="grad">One Simple API.</span></h1>
+  <p>Access DeepSeek, Qwen, GLM, Kimi and MiniMax through a single OpenAI-compatible endpoint. Pay-as-you-go with PayPal. No Chinese phone number, no VPN, no hassle.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#quickstart">Get Started — Free Trial</a>
+    <a class="btn btn-outline" href="#pricing">View Pricing</a>
+  </div>
+  <div class="hero-models">
+    <div class="label">Supported model families</div>
+    <div class="model-logos">
+      <span class="model-chip">DeepSeek</span>
+      <span class="model-chip">Qwen</span>
+      <span class="model-chip">GLM</span>
+      <span class="model-chip">Kimi</span>
+      <span class="model-chip">MiniMax</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FEATURES ================= -->
+<section id="features">
+  <h2 class="section-title">Why developers choose NovaAPI</h2>
+  <p class="section-sub">Frontier-level capability at a fraction of the cost.</p>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="icon">⚡</div>
+      <h3>OpenAI-Compatible</h3>
+      <p>Drop-in replacement for the OpenAI SDK. Change the base URL and API key — your existing code just works.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🌍</div>
+      <h3>Global Access</h3>
+      <p>No Chinese phone number or ID verification needed. Sign up with just an email and start building from anywhere.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">💳</div>
+      <h3>PayPal Billing</h3>
+      <p>Pay-as-you-go with PayPal. No subscription required, no wasted tokens — you only pay for what you use.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">💰</div>
+      <h3>Dramatically Lower Cost</h3>
+      <p>Top-tier models like DeepSeek and Qwen deliver strong reasoning at prices far below comparable Western APIs.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🛡️</div>
+      <h3>Reliable &amp; Fast</h3>
+      <p>Smart routing and automatic failover across providers keep your requests fast and your service online.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🔗</div>
+      <h3>Works With Your Stack</h3>
+      <p>Compatible with LangChain, Dify, Cursor, Claude Code, and any tool that speaks the OpenAI API format.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing">
+  <h2 class="section-title">Simple, Transparent Pricing</h2>
+  <p class="section-sub">Per-token pricing. No hidden fees.</p>
+  <div class="pricing-note">* Example list prices. Final prices are shown in the console and may change as model providers update their rates.</div>
+  <table class="pricing">
+    <thead>
+      <tr><th>Model</th><th>Best for</th><th>Input / 1M tokens</th><th>Output / 1M tokens</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>DeepSeek V4 Flash</td><td>Fast, affordable general tasks</td><td class="price">$0.10</td><td class="price">$0.20</td></tr>
+      <tr><td>DeepSeek V4 Pro</td><td>Complex reasoning &amp; coding</td><td class="price">$0.43</td><td class="price">$0.87</td></tr>
+      <tr><td>Qwen 3.6 Plus</td><td>Balanced multilingual performance</td><td class="price">$0.40</td><td class="price">$2.65</td></tr>
+      <tr><td>GLM 5.1</td><td>Agents, coding, general chat</td><td class="price">$0.88</td><td class="price">$2.80</td></tr>
+      <tr><td>Kimi K2.6</td><td>Long-context document work</td><td class="price">$0.61</td><td class="price">$3.07</td></tr>
+      <tr><td>MiniMax M2.5</td><td>Text &amp; multimodal</td><td class="price">$0.30</td><td class="price">$1.20</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ================= QUICK START ================= -->
+<section id="quickstart">
+  <h2 class="section-title">Start in 3 Minutes</h2>
+  <p class="section-sub">If you have used the OpenAI API, you already know how to use NovaAPI.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="num">1</div>
+      <h3>Sign up &amp; get your key</h3>
+      <p>Create an account with your email, top up with PayPal, and get your API key instantly.</p>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <h3>Point your client at us</h3>
+      <p>Set <code>base_url</code> to our endpoint and use your key. No code changes required.</p>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <h3>Start building</h3>
+      <p>Pick a model and go. Works with OpenAI SDK, LangChain, Cursor, Dify and more.</p>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top: 34px;">
+    <a class="btn btn-primary" href="mailto:contact@yourdomain.com">Request Access</a>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <h2 class="section-title">FAQ</h2>
+  <div style="max-width:720px; margin:0 auto;">
+    <details>
+      <summary>Do I need a Chinese phone number to sign up?</summary>
+      <p>No. We designed NovaAPI for global developers — sign up with just an email address and pay with PayPal.</p>
+    </details>
+    <details>
+      <summary>Which models can I access?</summary>
+      <p>We aggregate top Chinese model families including DeepSeek, Qwen, GLM, Kimi and MiniMax, with new models added as they are released.</p>
+    </details>
+    <details>
+      <summary>Is it compatible with my existing code?</summary>
+      <p>Yes. We expose an OpenAI-compatible API. Point your OpenAI SDK or tools such as LangChain, Dify or Cursor at our endpoint and you are ready.</p>
+    </details>
+    <details>
+      <summary>How does billing work?</summary>
+      <p>Pay-as-you-go. You top up your account balance via PayPal and are charged per token used. No monthly subscription.</p>
+    </details>
+    <details>
+      <summary>Where is my data processed?</summary>
+      <p>Requests are routed to the model providers you use. See our Privacy Policy below for details. Do not send sensitive personal or business data if you are not comfortable with this.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ================= LEGAL ================= -->
+<section id="terms" class="legal">
+  <h2 class="section-title">Terms &amp; Policies</h2>
+  <p class="section-sub">Last updated: September 2026</p>
+
+  <h2>1. Terms of Service</h2>
+  <p class="updated">Effective date: September 1, 2026</p>
+  <h3>1.1 Acceptance of Terms</h3>
+  <p>By creating an account or using the NovaAPI service ("the Service"), you agree to these Terms of Service. If you do not agree, please do not use the Service.</p>
+  <h3>1.2 Description of Service</h3>
+  <p>NovaAPI provides a unified application programming interface (API) that routes requests to third-party large language model providers. The Service aggregates access to models including, but not limited to, DeepSeek, Qwen, GLM, Kimi and MiniMax. We act as an access layer; the underlying models are operated by their respective providers.</p>
+  <h3>1.3 Account &amp; API Keys</h3>
+  <ul>
+    <li>You must provide accurate information when registering.</li>
+    <li>API keys are personal and non-transferable. You are responsible for keeping your keys secret.</li>
+    <li>You may not share, resell, or sublicense your API keys or account access without our prior written consent.</li>
+    <li>We may suspend accounts that violate these terms or are used for unlawful purposes.</li>
+  </ul>
+  <h3>1.4 Acceptable Use</h3>
+  <ul>
+    <li>You agree not to use the Service to generate illegal, harmful, deceptive, or abusive content, or to violate any applicable law.</li>
+    <li>You may not attempt to reverse engineer, probe, or disrupt the Service.</li>
+    <li>You may not resell raw API access to the Service as a competing gateway.</li>
+  </ul>
+  <h3>1.5 Payments &amp; Refunds</h3>
+  <ul>
+    <li>Usage is billed in advance against your prepaid balance, deducted per token consumed.</li>
+    <li>Top-ups are non-refundable except where required by law or as otherwise stated.</li>
+    <li>We reserve the right to change prices; changes will not affect already-purchased balances.</li>
+  </ul>
+  <h3>1.6 Disclaimers &amp; Limitation of Liability</h3>
+  <p>The Service is provided "as is" without warranties of any kind. Upstream model providers may change, deprecate, or limit models at any time. To the maximum extent permitted by law, we are not liable for indirect, incidental, or consequential damages, or for any loss arising from your use of the Service or the output of third-party models.</p>
+  <h3>1.7 Termination</h3>
+  <p>Either party may terminate this agreement. Upon termination you must stop using the Service; any remaining balance will be handled per our refund policy.</p>
+  <h3>1.8 Governing Law</h3>
+  <p>These terms are governed by the laws of Hong Kong SAR. Any disputes shall be resolved in the courts of Hong Kong SAR.</p>
+
+  <h2>2. Privacy Policy</h2>
+  <p class="updated">Effective date: September 1, 2026</p>
+  <h3>2.1 Information We Collect</h3>
+  <ul>
+    <li><strong>Account data:</strong> email address and billing records required to operate your account.</li>
+    <li><strong>API request data:</strong> the prompts and responses transmitted through the Service, plus metadata such as timestamps, token counts and model used.</li>
+    <li><strong>Usage data:</strong> aggregated metrics used for billing and service improvement.</li>
+  </ul>
+  <h3>2.2 How We Use Information</h3>
+  <ul>
+    <li>To provide, operate, secure and improve the Service.</li>
+    <li>To calculate and bill your usage accurately.</li>
+    <li>To respond to support requests and comply with legal obligations.</li>
+  </ul>
+  <h3>2.3 Data Sharing with Model Providers</h3>
+  <p>To fulfill your requests, prompts and related data are forwarded to the third-party model provider you select. Those providers process data under their own privacy policies. We do not sell your personal data.</p>
+  <h3>2.4 Data Retention</h3>
+  <p>Request logs are retained for a limited period needed for billing, abuse prevention and debugging, after which they are deleted or anonymized.</p>
+  <h3>2.5 Security</h3>
+  <p>We use industry-standard measures to protect account credentials and data in transit. No method of transmission is 100% secure; you should not submit highly sensitive information through the Service.</p>
+  <h3>2.6 Your Rights</h3>
+  <p>You may request access to, correction of, or deletion of your personal data by contacting us. We will respond within a reasonable timeframe.</p>
+  <h3>2.7 Contact</h3>
+  <p>For privacy or legal inquiries: <a href="mailto:contact@yourdomain.com">contact@yourdomain.com</a></p>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="brand" style="font-size:15px; margin-bottom:8px;">Nova<span style="color:var(--accent)">API</span></div>
+  <div>© 2026 NovaAPI. All rights reserved.</div>
+  <div style="margin-top:6px;">
+    <a href="#terms">Terms of Service</a> ·
+    <a href="#terms">Privacy Policy</a> ·
+    <a href="mailto:contact@yourdomain.com">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

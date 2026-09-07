@@ -183,6 +183,8 @@
 
 /* ---------- Pricing ---------- */
 #novaapi-home .pricing-note { text-align: center; color: var(--text-dim); font-size: 13px; margin-bottom: 24px; }
+#novaapi-home .pricing-block-title { max-width: 860px; margin: 0 auto 14px; font-size: 19px; font-weight: 700; color: var(--text); }
+#novaapi-home .pricing-block-title { text-align: center; }
 #novaapi-home table.pricing {
   width: 100%; max-width: 860px; margin: 0 auto; border-collapse: collapse;
   background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
@@ -267,9 +269,9 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-copy">
-      <div class="tag">&#9679; One API &middot; All Models &middot; Global Access</div>
+      <div class="tag">&#9679; Frontier Chinese AI &middot; One API &middot; Global Access</div>
       <h1>Top Chinese AI Models.<br><span class="grad">One Simple API.</span></h1>
-      <p>Access DeepSeek, Qwen, GLM, Kimi and MiniMax through a single OpenAI-compatible endpoint. Pay-as-you-go with PayPal. No Chinese phone number, no VPN, no hassle.</p>
+      <p>Access frontier Chinese models like DeepSeek through a single OpenAI-compatible endpoint — also compatible with Claude Code and Anthropic SDK. Pay-as-you-go with PayPal or USDT (TRC20). No Chinese phone number, no VPN, no hassle.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://api.lbase.com/register">Get Started &mdash; Create Account</a>
         <a class="btn btn-outline" href="#pricing">View Pricing</a>
@@ -277,11 +279,9 @@
       <div class="hero-models">
         <div class="label">Supported model families</div>
         <div class="model-logos">
-          <span class="model-chip">DeepSeek</span>
-          <span class="model-chip">Qwen</span>
-          <span class="model-chip">GLM</span>
-          <span class="model-chip">Kimi</span>
-          <span class="model-chip">MiniMax</span>
+          <span class="model-chip">DeepSeek V4</span>
+          <span class="model-chip">Claude Compatible</span>
+          <span class="model-chip">OpenAI-compatible API</span>
         </div>
       </div>
     </div>
@@ -336,13 +336,13 @@
     </div>
     <div class="feature">
       <div class="icon">&#128179;</div>
-      <h3>PayPal Billing</h3>
-      <p>Pay-as-you-go with PayPal. No subscription required, no wasted tokens &mdash; you only pay for what you use.</p>
+      <h3>PayPal &amp; USDT Billing</h3>
+      <p>Pay-as-you-go with PayPal or USDT (TRC20). No subscription required, no wasted tokens &mdash; you only pay for what you use.</p>
     </div>
     <div class="feature">
       <div class="icon">&#128176;</div>
       <h3>Dramatically Lower Cost</h3>
-      <p>Top-tier models like DeepSeek and Qwen deliver strong reasoning at prices far below comparable Western APIs.</p>
+      <p>Top-tier models like DeepSeek V4 deliver strong reasoning at a fraction of comparable Western API prices.</p>
     </div>
     <div class="feature">
       <div class="icon">&#128737;</div>
@@ -380,21 +380,59 @@
 <!-- ================= PRICING ================= -->
 <section id="pricing" class="nh-sec">
   <h2 class="section-title">Simple, Transparent Pricing</h2>
-  <p class="section-sub">Per-token pricing. No hidden fees.</p>
-  <div class="pricing-note">* Example list prices. Final prices are shown in the console and may change as model providers update their rates.</div>
+  <p class="section-sub">Per-token pricing. Pay as you go &mdash; no subscription, no hidden fees.</p>
+  <div class="pricing-note">* Final prices are shown in the console and may change as model providers update their rates.</div>
+
+  <!-- DeepSeek native models -->
+  <h3 class="pricing-block-title">DeepSeek V4 &mdash; frontier reasoning, no Chinese account needed</h3>
   <table class="pricing">
     <thead>
       <tr><th>Model</th><th>Best for</th><th>Input / 1M tokens</th><th>Output / 1M tokens</th></tr>
     </thead>
     <tbody>
-      <tr><td>DeepSeek V4 Flash</td><td>Fast, affordable general tasks</td><td class="price">$0.10</td><td class="price">$0.20</td></tr>
-      <tr><td>DeepSeek V4 Pro</td><td>Complex reasoning &amp; coding</td><td class="price">$0.43</td><td class="price">$0.87</td></tr>
-      <tr><td>Qwen 3.6 Plus</td><td>Balanced multilingual performance</td><td class="price">$0.40</td><td class="price">$2.65</td></tr>
-      <tr><td>GLM 5.1</td><td>Agents, coding, general chat</td><td class="price">$0.88</td><td class="price">$2.80</td></tr>
-      <tr><td>Kimi K2.6</td><td>Long-context document work</td><td class="price">$0.61</td><td class="price">$3.07</td></tr>
-      <tr><td>MiniMax M2.5</td><td>Text &amp; multimodal</td><td class="price">$0.30</td><td class="price">$1.20</td></tr>
+      <tr>
+        <td>DeepSeek V4 Flash</td>
+        <td>Fast daily driver &mdash; GPT-5-class output at up to <strong>84% lower cost</strong></td>
+        <td class="price">$0.55</td><td class="price">$1.65</td>
+      </tr>
+      <tr>
+        <td>DeepSeek V4 Pro</td>
+        <td>Complex reasoning, deep code work</td>
+        <td class="price">$1.65</td><td class="price">$4.95</td>
+      </tr>
+      <tr>
+        <td>DeepSeek V4 Flash Vision</td>
+        <td>Chat with image input</td>
+        <td class="price">$0.55</td><td class="price">$1.65</td>
+      </tr>
     </tbody>
   </table>
+
+  <!-- Claude-compatible models -->
+  <h3 class="pricing-block-title" style="margin-top:36px;">
+    Claude Compatible &mdash; plug Claude Code or the Anthropic SDK straight in
+  </h3>
+  <table class="pricing">
+    <thead>
+      <tr><th>Compatible model</th><th>Input / 1M tokens</th><th>Output / 1M tokens</th></tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="3" style="text-align:left; padding:8px 18px; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; color:var(--text-dim); border-bottom:1px solid var(--border);">Sonnet &amp; Haiku tier</td></tr>
+      <tr><td>Claude Sonnet 5</td><td class="price">$0.77</td><td class="price">$2.31</td></tr>
+      <tr><td>Claude Sonnet 4.6</td><td class="price">$0.77</td><td class="price">$2.31</td></tr>
+      <tr><td>Claude Haiku 4.5</td><td class="price">$0.77</td><td class="price">$2.31</td></tr>
+      <tr><td colspan="3" style="text-align:left; padding:8px 18px; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; color:var(--text-dim); border-bottom:1px solid var(--border);">Opus &amp; Fable tier</td></tr>
+      <tr><td>Claude Opus 5</td><td class="price">$2.31</td><td class="price">$6.93</td></tr>
+      <tr><td>Claude Opus 4.6</td><td class="price">$2.31</td><td class="price">$6.93</td></tr>
+      <tr><td>Claude Opus 4.5</td><td class="price">$2.31</td><td class="price">$6.93</td></tr>
+      <tr><td>Claude Fable 5.1</td><td class="price">$2.31</td><td class="price">$6.93</td></tr>
+      <tr><td>Claude Fable 5</td><td class="price">$2.31</td><td class="price">$6.93</td></tr>
+    </tbody>
+  </table>
+  <p class="section-sub" style="margin-top:14px; font-size:13px; color:var(--text-dim);">
+    Claude-compatible names keep your existing Claude Code / Anthropic SDK workflow untouched, at roughly
+    <strong>70&ndash;85% below Anthropic&rsquo;s list prices</strong>.
+  </p>
 </section>
 
 <!-- ================= QUICK START ================= -->
@@ -405,7 +443,7 @@
     <div class="step">
       <div class="num">1</div>
       <h3>Sign up &amp; get your key</h3>
-      <p>Create an account with your email, top up with PayPal, and get your API key instantly.</p>
+      <p>Create an account with your email, top up with PayPal or USDT, and get your API key instantly.</p>
     </div>
     <div class="step">
       <div class="num">2</div>
@@ -430,11 +468,11 @@
   <div style="max-width:720px; margin:0 auto;">
     <details class="nh-details">
       <summary>Do I need a Chinese phone number to sign up?</summary>
-      <p>No. We designed NovaAPI for global developers &mdash; sign up with just an email address and pay with PayPal.</p>
+      <p>No. We designed NovaAPI for global developers &mdash; sign up with just an email address and pay with PayPal or USDT.</p>
     </details>
     <details class="nh-details">
       <summary>Which models can I access?</summary>
-      <p>We aggregate top Chinese model families including DeepSeek, Qwen, GLM, Kimi and MiniMax, with new models added as they are released.</p>
+      <p>We currently offer DeepSeek V4 models (native) plus Claude-compatible endpoints backed by our high-performance Chinese model network. More Chinese model families (Qwen, GLM, Kimi and MiniMax) are being onboarded and will appear in the console as they go live.</p>
     </details>
     <details class="nh-details">
       <summary>Is it compatible with my existing code?</summary>
@@ -442,7 +480,7 @@
     </details>
     <details class="nh-details">
       <summary>How does billing work?</summary>
-      <p>Pay-as-you-go. You top up your account balance via PayPal and are charged per token used. No monthly subscription.</p>
+      <p>Pay-as-you-go. You top up your account balance via PayPal or USDT and are charged per token used. No monthly subscription.</p>
     </details>
     <details class="nh-details">
       <summary>Where is my data processed?</summary>
@@ -461,7 +499,7 @@
   <h3>1.1 Acceptance of Terms</h3>
   <p>By creating an account or using the NovaAPI service (&ldquo;the Service&rdquo;), you agree to these Terms of Service. If you do not agree, please do not use the Service.</p>
   <h3>1.2 Description of Service</h3>
-  <p>NovaAPI provides a unified application programming interface (API) that routes requests to third-party large language model providers. The Service aggregates access to models including, but not limited to, DeepSeek, Qwen, GLM, Kimi and MiniMax. We act as an access layer; the underlying models are operated by their respective providers.</p>
+  <p>NovaAPI provides a unified application programming interface (API) that routes requests to third-party large language model providers. The Service currently offers DeepSeek V4 models as well as Claude-compatible endpoints backed by high-performance Chinese model infrastructure; additional Chinese model families such as Qwen, GLM, Kimi and MiniMax are added as they become available. We act as an access layer; the underlying models are operated by their respective providers.</p>
   <h3>1.3 Account &amp; API Keys</h3>
   <ul>
     <li>You must provide accurate information when registering.</li>
@@ -511,7 +549,7 @@
   <h3>2.6 Your Rights</h3>
   <p>You may request access to, correction of, or deletion of your personal data by contacting us. We will respond within a reasonable timeframe.</p>
   <h3>2.7 Contact</h3>
-  <p>For privacy or legal inquiries: <a href="mailto:contact@yourdomain.com">contact@yourdomain.com</a></p>
+  <p>For privacy or legal inquiries: <a href="mailto:hello@lbase.com">hello@lbase.com</a></p>
 </section>
 
 <!-- ================= FOOTER ================= -->

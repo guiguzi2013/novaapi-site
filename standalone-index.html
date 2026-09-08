@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NovaAPI — One API for Frontier Chinese AI (DeepSeek &amp; Claude-Compatible)</title><meta name="description" content="NovaAPI gives developers worldwide one OpenAI-compatible API for frontier Chinese models like DeepSeek V4 — plus Claude-compatible endpoints that plug straight into Claude Code and the Anthropic SDK. No Chinese phone number needed. Pay with PayPal or USDT."><link rel="canonical" href="https://novaapi.lbase.com/"><meta property="og:title" content="NovaAPI — One API for Frontier Chinese AI"><meta property="og:description" content="DeepSeek V4 and Claude-compatible models through one API. Global access, PayPal &amp; USDT billing."><meta property="og:url" content="https://novaapi.lbase.com/"><meta property="og:type" content="website"><style>html { background: #0b0e14; } body { margin: 0; }</style></head><body><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NovaAPI — One API for Frontier Chinese AI (DeepSeek &amp; Claude-Compatible)</title><meta name="description" content="NovaAPI gives developers worldwide one OpenAI-compatible API for frontier Chinese models like DeepSeek V4 — plus Claude-compatible endpoints that plug straight into Claude Code and the Anthropic SDK. No Chinese phone number needed. Pay with PayPal or USDT."><link rel="canonical" href="https://novaapi.lbase.com/"><meta property="og:title" content="NovaAPI — One API for Frontier Chinese AI"><meta property="og:description" content="DeepSeek V4 and Claude-compatible models through one API. Global access, PayPal &amp; USDT billing."><meta property="og:url" content="https://novaapi.lbase.com/"><meta property="og:type" content="website"><link rel="icon" type="image/png" href="logo.png"><meta property="og:image" content="https://novaapi.lbase.com/logo.png"><style>html { background: #0b0e14; } body { margin: 0; }</style></head><body><style>
 /* ===== NovaAPI Home — scoped to #novaapi-home so it never leaks into the SPA shell ===== */
 #novaapi-home {
   --bg: #0b0e14;
@@ -33,8 +33,11 @@
   max-width: 1080px; margin: 0 auto; padding: 14px 24px;
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
 }
-#novaapi-home .brand { font-weight: 700; font-size: 18px; letter-spacing: 0.3px; color: var(--text); }
+#novaapi-home .brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 18px; letter-spacing: 0.3px; color: var(--text); }
 #novaapi-home .brand span { color: var(--accent); }
+#novaapi-home .brand img { width: 22px; height: 22px; border-radius: 5px; object-fit: cover; flex: none; }
+#novaapi-home a.brand:hover { text-decoration: none; }
+#novaapi-home .nh-foot .brand img { width: 18px; height: 18px; border-radius: 4px; }
 #novaapi-home .nav-links { display: flex; gap: 22px; align-items: center; font-size: 14px; flex-wrap: wrap; }
 #novaapi-home .nav-links a.nh-link { color: var(--text-dim); }
 #novaapi-home .nav-links a.nh-link:hover { color: var(--text); text-decoration: none; }
@@ -258,7 +261,7 @@
 <!-- ================= HEADER ================= -->
 <header class="nh">
   <div class="nav">
-    <div class="brand">Nova<span>API</span></div>
+    <a class="brand" href="index.html"><img src="logo.png" alt="NovaAPI logo"/>Nova<span>API</span></a>
     <div class="nav-links">
       <a class="nh-link" href="#features">Features</a>
       <a class="nh-link" href="#pricing">Pricing</a>
@@ -562,7 +565,7 @@
 
 <!-- ================= FOOTER ================= -->
 <footer class="nh-foot">
-  <div class="brand" style="font-size:15px; margin-bottom:8px; color:var(--text);">Nova<span style="color:var(--accent)">API</span></div>
+  <a class="brand" href="index.html" style="font-size:15px; margin-bottom:8px; color:var(--text);"><img src="logo.png" alt="NovaAPI logo"/>Nova<span style="color:var(--accent)">API</span></a>
   <div>&copy; 2026 NovaAPI. All rights reserved.</div>
   <div style="margin-top:6px;">
     <a href="#terms">Terms of Service</a> &middot;

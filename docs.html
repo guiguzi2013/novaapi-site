@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NovaAPI Docs — Quick Start, Tools &amp; Integration Guide</title>
 <meta name="description" content="NovaAPI documentation: connect Claude Code, Cursor, Codex, OpenCode, OpenAI SDK and more to frontier Chinese models in minutes. Base URL, models, pricing and billing.">
-<link rel="canonical" href="https://novaapi.lbase.com/docs.html">
+<link rel="canonical" href="https://novaapi.lbase.com/docs.html"><link rel="icon" type="image/png" href="logo.png">
 <style>
   :root {
     --bg: #0b0e14; --bg-soft: #11161f; --card: #151b26; --border: #232c3b;
@@ -19,8 +19,10 @@
 
   header { position: sticky; top: 0; z-index: 50; background: rgba(11,14,20,.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
   .nav { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-  .brand { font-weight: 700; font-size: 18px; letter-spacing: 0.3px; color: var(--text); }
+  .brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 18px; letter-spacing: 0.3px; color: var(--text); }
   .brand span { color: var(--accent); }
+  .brand img { width: 22px; height: 22px; border-radius: 5px; object-fit: cover; flex: none; }
+  a.brand:hover { text-decoration: none; }
   .nav-links { display: flex; gap: 22px; font-size: 14px; align-items: center; flex-wrap: wrap; }
   .nav-links a { color: var(--text-dim); }
   .nav-links a:hover { color: var(--text); text-decoration: none; }
@@ -84,7 +86,7 @@
 
 <header>
   <div class="nav">
-    <div class="brand">Nova<span>API</span></div>
+    <a class="brand" href="index.html"><img src="logo.png" alt="NovaAPI logo"/>Nova<span>API</span></a>
     <div class="nav-links">
       <a href="https://novaapi.lbase.com/">Home</a>
       <a href="#quickstart">Quick Start</a>

@@ -131,6 +131,7 @@
 </ol>
 
 <div class="shot-box"><span class="shot-id">[SHOT-01]</span>Sign-up form on api.lbase.com/register</div>
+<img src="shots/web-shot01.jpg" alt="NovaAPI sign-up form" style="max-width:100%; border:1px solid var(--border); border-radius:10px; margin-bottom:24px;" />
 
 <h3 id="topup">2. Top up your balance</h3>
 <p>NovaAPI is pay-as-you-go: you prepay a USD balance, and every request deducts from it by tokens used. No subscription.</p>
@@ -147,6 +148,7 @@
 <div class="callout amber"><strong>USDT tips:</strong> make the payment in a <strong>single transfer</strong> for the full amount — split or partial transfers may not be captured. If you withdraw from an exchange, remember it deducts a withdrawal fee, so transfer a little extra to arrive at the amount you want. Balance is credited with the exact on-chain amount received.</div>
 
 <div class="shot-box"><span class="shot-id">[SHOT-02]</span>Top-up page showing PayPal and USDT options</div>
+<img src="shots/web-shot02.jpg" alt="NovaAPI top-up page with PayPal and USDT" style="max-width:100%; border:1px solid var(--border); border-radius:10px; margin-bottom:24px;" />
 
 <h3 id="apikey">3. Create an API key</h3>
 <ol>
@@ -163,7 +165,9 @@
 <div class="callout amber"><strong>Important:</strong> a key must belong to a group to work. A key created without a group cannot call any model.</div>
 
 <div class="shot-box"><span class="shot-id">[SHOT-03]</span>Create-key dialog: name, group picker (DeepSeek / Claude Compatible), limit switches</div>
+<img src="shots/web-shot03.jpg" alt="Create API key dialog with group selection" style="max-width:100%; border:1px solid var(--border); border-radius:10px; margin-bottom:24px;" />
 <div class="shot-box"><span class="shot-id">[SHOT-04]</span>API Keys list showing keys, their group and per-key usage</div>
+<img src="shots/web-shot04.jpg" alt="API keys list showing group and usage per key" style="max-width:100%; border:1px solid var(--border); border-radius:10px; margin-bottom:24px;" />
 
 <h3 id="endpoint">Base URL</h3>
 <p>Use this endpoint everywhere a tool asks for an API address:</p>
@@ -232,6 +236,7 @@ claude</code></pre>
 </ul>
 
 <div class="shot-box"><span class="shot-id">[SHOT-05]</span>Claude Code running a session against NovaAPI (reply + model badge)</div>
+<p>After setup, launch <code>claude</code> in your terminal — you should see the model badge <code>deepseek-v4-flash · API Usage Billing</code> at the bottom and normal replies. The first launch asks about the workspace folder and theme; answer them once and you're set.</p>
 
 <h3 id="cursor">Cursor</h3>
 <ol>
@@ -241,6 +246,7 @@ claude</code></pre>
   <li>Add a model name (e.g. <code>deepseek-v4-flash</code>) and select it in the model picker.</li>
 </ol>
 <div class="shot-box"><span class="shot-id">[SHOT-06]</span>Cursor settings: override OpenAI Base URL with api.lbase.com/v1</div>
+<p>In Cursor open <strong>Settings → Models</strong>, enable <strong>Override OpenAI Base URL</strong> and paste the endpoint above — then add <code>deepseek-v4-flash</code> as a model.</p>
 
 <h3 id="codex">Codex CLI (OpenAI)</h3>
 <p>Create or edit <code>~/.codex/config.toml</code> (Windows: <code>%userprofile%\.codex\config.toml</code>):</p>
@@ -259,6 +265,7 @@ export NOVAAPI_API_KEY=sk-your-key-here
 
 codex</code></pre>
 <div class="shot-box"><span class="shot-id">[SHOT-07]</span>Codex config.toml example (or Codex running against NovaAPI)</div>
+<p>Save the snippet above as your Codex config and run <code>codex</code> — the CLI will use NovaAPI for all requests.</p>
 
 <h3 id="opencode">OpenCode</h3>
 <p>OpenCode reads <code>opencode.json</code> in your project:</p>
@@ -326,6 +333,9 @@ codex</code></pre>
   <li><strong>Rate limiting</strong>: per-key concurrency is generous; under heavy parallel load requests queue briefly instead of failing. Add more keys in the console to scale.</li>
 </ul>
 <div class="shot-box"><span class="shot-id">[SHOT-08]</span>Usage dashboard (requests / tokens / spend)</div>
+<img src="shots/web-shot08-1.jpg" alt="NovaAPI usage dashboard" style="max-width:100%; border:1px solid var(--border); border-radius:10px; margin-bottom:24px;" />
+<p>Every request is recorded per model — including Claude-compatible names, as shown in the recent usage list below (Claude Code / client requests appear with their model names and exact cost):</p>
+<img src="shots/web-shot08.jpg" alt="NovaAPI dashboard with per-model usage records" style="max-width:100%; border:1px solid var(--border); border-radius:10px; margin-bottom:24px;" />
 
 <!-- ============ FAQ ============ -->
 <h2 id="faq">FAQ</h2>

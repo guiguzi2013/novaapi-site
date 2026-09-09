@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepSeek V4.1 Flash Is Here — and You Can Use It From Claude Code Today</title>
+<meta name="description" content="DeepSeek just shipped V4.1 Flash with V4 Pro-beating performance at a lower price. Here's how developers outside China can wire it into Claude Code, Cursor, or any OpenAI-compatible client.">
+<link rel="canonical" href="https://novaapi.lbase.com/blog/deepseek-v4-1-flash-claude-code.html">
+<link rel="icon" type="image/png" href="../logo.png">
+<style>
+  :root {
+    --bg: #0b0e14; --bg-soft: #11161f; --card: #151b26; --border: #232c3b;
+    --text: #e6eaf2; --text-dim: #9aa5b8; --accent: #4f8cff; --green: #3ddc97;
+    --code-bg: #0d1117; --code-border: #1e2636;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.7; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header { position: sticky; top: 0; z-index: 50; background: rgba(11,14,20,.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .nav { max-width: 1000px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 18px; letter-spacing: 0.3px; color: var(--text); }
+  .brand span { color: var(--accent); }
+  .brand img { width: 22px; height: 22px; border-radius: 5px; }
+  a.brand:hover { text-decoration: none; }
+  .nav-links { display: flex; gap: 22px; font-size: 14px; align-items: center; flex-wrap: wrap; }
+  .nav-links a { color: var(--text-dim); }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  .nav-links .btn { padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; border: none; }
+  .nav-links .btn-primary { background: var(--accent); color: #fff; }
+  .nav-links .btn-primary:hover { background: #3a76e8; color: #fff; }
+  .nav-links .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .nav-links .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  main h1 { font-size: 32px; line-height: 1.25; margin-bottom: 10px; }
+  .meta { color: var(--text-dim); font-size: 13.5px; margin-bottom: 30px; }
+  main h2 { font-size: 22px; margin: 44px 0 12px; padding-top: 24px; border-top: 1px solid var(--border); }
+  main h3 { font-size: 17px; margin: 26px 0 8px; }
+  main p { color: var(--text-dim); margin-bottom: 14px; }
+  main ul, main ol { color: var(--text-dim); margin: 0 0 14px 22px; }
+  main li { margin-bottom: 6px; }
+  main strong { color: var(--text); }
+  pre { background: var(--code-bg); border: 1px solid var(--code-border); border-radius: 10px; padding: 16px 18px; overflow-x: auto; margin: 14px 0 20px; }
+  code { font-family: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas, monospace; }
+  p code, li code { background: var(--bg-soft); border: 1px solid var(--border); padding: 1px 6px; border-radius: 5px; font-size: 13px; color: var(--text); }
+  pre code { background: none; border: none; padding: 0; color: #d5dce8; }
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--accent); background: var(--bg-soft); border-radius: 8px; padding: 12px 16px; margin: 16px 0; color: var(--text-dim); }
+  .card { border: 1px solid var(--border); background: var(--bg-soft); border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; }
+  .card h2 { border: none; padding: 0; margin: 0 0 6px; font-size: 19px; }
+  .card .date { color: var(--text-dim); font-size: 12.5px; margin-bottom: 8px; }
+  .card p { color: var(--text-dim); margin: 0 0 12px; font-size: 14.5px; }
+  footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; color: var(--text-dim); font-size: 13px; }
+  footer a { color: var(--text-dim); }
+  .tag { display: inline-block; color: var(--accent); font-size: 12px; margin-right: 10px; }
+  @media (max-width: 640px) { .nav-links a.hide-m { display: none; } main h1 { font-size: 24px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="../index.html"><img src="../logo.png" alt="NovaAPI logo"/>Nova<span>API</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../docs.html">Docs</a>
+      <a href="index.html">Blog</a>
+      <a class="btn btn-outline" href="https://api.lbase.com/login">Log in</a>
+      <a class="btn btn-primary" href="https://api.lbase.com/register">Sign Up</a>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+  <main>
+    <h1>DeepSeek V4.1 Flash Is Here — and You Can Use It From Claude Code Today</h1>
+    <div class="meta">Sep 10, 2026 · <span class="tag">#deepseek</span><span class="tag">#claude</span><span class="tag">#tutorial</span></div>
+<p>If you follow Chinese AI at all, you know DeepSeek's pricing announcements have been a wild ride this quarter: peak/off-peak billing in August, a big Flash price cut in September, and now — literally today — <strong>V4.1 Flash</strong> is rolling out, with DeepSeek routing all <code>deepseek-v4-pro</code> traffic to the new model at the new (lower) rate.</p>
+<p>Here's the short version of today's news, and then the part that matters for developers outside China: <strong>how to actually use it from your existing tools.</strong></p>
+<h2>What changed today</h2>
+<ul>
+<li><strong>V4.1 Flash</strong> officially launches (2026-09-10, 12:00 Beijing time).</li>
+<li>Internally tested to beat <strong>V4 Pro</strong> on performance, speed, cost, and total response time.</li>
+<li>Until V4.1 Pro ships, requests to <code>deepseek-v4-pro</code> are <strong>auto-routed to V4.1 Flash</strong> and billed at V4.1 Flash rates.</li>
+<li>New pricing (per 1M tokens, off-peak / peak): input <strong>¥1 / ¥2</strong>, output <strong>¥4 / ¥8</strong> — roughly <strong>30% cheaper than V4 Flash</strong>, and far below V4 Pro's old ¥4.5 / ¥13.5.</li>
+</ul>
+<p>That's a serious price-to-performance jump. The models are frontier-level, the context window is 1M tokens, and the API speaks both OpenAI *and* Anthropic dialects natively.</p>
+<h2>The one annoying thing</h2>
+<p>DeepSeek's own platform is built for the domestic market. If you're outside China, signing up means dealing with a <strong>Chinese phone number</strong> for verification, Chinese payment rails, and a docs experience that assumes you live there. A lot of us just want to point our existing clients at the model and go.</p>
+<p>That's exactly the gap I built <a href="https://novaapi.lbase.com">NovaAPI</a> for: a gateway that gives you the <strong>same DeepSeek models (V4.1 line included)</strong> through a normal international flow — sign up with any email, pay with <strong>PayPal or USDT</strong>, no Chinese phone number anywhere. It also aggregates Claude-compatible endpoints, so Claude Code talks to it natively. (Full disclosure: this is my project — but the tutorial below works for any OpenAI/Anthropic-compatible gateway.)</p>
+<h2>5-minute setup: DeepSeek V4.1 from Claude Code</h2>
+<p><strong>Step 1 — Create an account and a key</strong></p>
+<ol>
+<li>Sign up at <a href="https://api.lbase.com/register">api.lbase.com/register</a> (any email works).</li>
+<li>Top up with PayPal or USDT — the minimum is small, just enough to try it.</li>
+<li>Go to <strong>API Keys</strong> and create a key. Pick the <strong>DeepSeek</strong> channel when asked.</li>
+</ol>
+<p>You'll get something like <code>sk-...</code>.</p>
+<p><strong>Step 2 — Point Claude Code at it</strong></p>
+<p>Claude Code respects the <code>ANTHROPIC_BASE_URL</code> and <code>ANTHROPIC_AUTH_TOKEN</code> environment variables:</p>
+<pre><code>export ANTHROPIC_BASE_URL="https://api.lbase.com"
+export ANTHROPIC_AUTH_TOKEN="sk-your-novaapi-key"
+claude</code></pre>
+<p>That's it. Claude Code will use the Anthropic-compatible endpoint, and NovaAPI maps Claude model names (<code>claude-sonnet-4-6</code>, <code>claude-fable-5</code>, etc.) onto the DeepSeek V4.1 line automatically.</p>
+<p><strong>Step 3 — Or use any OpenAI-compatible client (Cursor, Cherry Studio, code)</strong></p>
+<pre><code>from openai import OpenAI
+
+client = OpenAI(
+    api_key="sk-your-novaapi-key",
+    base_url="https://api.lbase.com/v1",
+)
+
+resp = client.chat.completions.create(
+    model="deepseek-v4-flash",   # serving V4.1 Flash as of today
+    messages=[{"role": "user", "content": "Write a quick Python snippet for a retry-with-backoff helper."}],
+)
+print(resp.choices[0].message.content)</code></pre>
+<p>Cursor: Settings → Models → OpenAI-compatible → Base URL <code>https://api.lbase.com/v1</code>.</p>
+<p><strong>Step 4 — Verify</strong></p>
+<pre><code>curl https://api.lbase.com/v1/models \
+  -H "Authorization: Bearer sk-your-novaapi-key"</code></pre>
+<p>You'll see the model list. Run a couple of prompts and check your usage page — billing is transparent, pay-as-you-go, in USD.</p>
+<h2>Why not just call DeepSeek directly?</h2>
+<p>If you already have a Chinese phone number and a way to pay in CNY, absolutely go direct — it'll be marginally cheaper. NovaAPI is for everyone else, and for people who want:</p>
+<ul>
+<li><strong>One key for multiple Chinese models</strong> (DeepSeek today, more families coming),</li>
+<li><strong>Claude Code / Anthropic-SDK compatibility</strong> without shims,</li>
+<li><strong>PayPal/USDT billing</strong> instead of Chinese payment apps,</li>
+<li>No phone verification, no VPN, no WeChat.</li>
+</ul>
+<h2>A note on pricing and peak hours</h2>
+<p>DeepSeek bills peak/off-peak (peak = Mon–Fri 01:00–04:00 & 06:00–10:00 UTC). NovaAPI passes the official <strong>off-peak price × a transparent multiplier</strong> to you, and like DeepSeek, peak-hour requests cost more. The price table on <a href="https://novaapi.lbase.com">novaapi.lbase.com</a> is always current — check it before you commit a big batch job.</p>
+<h2>Wrapping up</h2>
+<p>V4.1 Flash looks like the best price-to-performance point in the DeepSeek lineup right now, and with the Pro auto-routing in place, "deepseek-v4-flash" is secretly a very fast, very cheap flagship. If you've been wanting to try Chinese frontier models but bounced off the phone-number wall — the door is open.</p>
+<p>Questions, corrections, or war stories from wiring this into your stack? Drop a comment. I read all of them.</p>
+
+  </main>
+</div>
+<footer>
+  <div>NovaAPI — a product of <a href="https://lbase.com">L-Base</a></div>
+  <div style="margin-top:6px;"><a href="https://novaapi.lbase.com/">Product</a> · <a href="https://api.lbase.com/login">Console</a> · <a href="mailto:hello@lbase.com">hello@lbase.com</a></div>
+</footer>
+</body>
+</html>

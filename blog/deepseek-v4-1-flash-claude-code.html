@@ -53,6 +53,14 @@
   footer a { color: var(--text-dim); }
   .tag { display: inline-block; color: var(--accent); font-size: 12px; margin-right: 10px; }
   @media (max-width: 640px) { .nav-links a.hide-m { display: none; } main h1 { font-size: 24px; } }
+
+  main table { width: 100%; border-collapse: collapse; margin: 16px 0 22px; font-size: 14px; }
+  main table th, main table td { border: 1px solid var(--border); padding: 9px 14px; text-align: left; color: var(--text-dim); }
+  main table th { background: var(--bg-soft); color: var(--text); font-size: 13px; }
+  main table td strong, main table th strong { color: var(--text); }
+  main h4 { font-size: 15px; margin: 20px 0 6px; color: var(--text); }
+  main hr { border: none; border-top: 1px solid var(--border); margin: 30px 0; }
+  main em { color: var(--text-dim); }
 </style>
 </head>
 <body>
@@ -81,7 +89,7 @@
 <li>Until V4.1 Pro ships, requests to <code>deepseek-v4-pro</code> are <strong>auto-routed to V4.1 Flash</strong> and billed at V4.1 Flash rates.</li>
 <li>New pricing (per 1M tokens, off-peak / peak): input <strong>¥1 / ¥2</strong>, output <strong>¥4 / ¥8</strong> — roughly <strong>30% cheaper than V4 Flash</strong>, and far below V4 Pro's old ¥4.5 / ¥13.5.</li>
 </ul>
-<p>That's a serious price-to-performance jump. The models are frontier-level, the context window is 1M tokens, and the API speaks both OpenAI *and* Anthropic dialects natively.</p>
+<p>That's a serious price-to-performance jump. The models are frontier-level, the context window is 1M tokens, and the API speaks both OpenAI <em>and</em> Anthropic dialects natively.</p>
 <h2>The one annoying thing</h2>
 <p>DeepSeek's own platform is built for the domestic market. If you're outside China, signing up means dealing with a <strong>Chinese phone number</strong> for verification, Chinese payment rails, and a docs experience that assumes you live there. A lot of us just want to point our existing clients at the model and go.</p>
 <p>That's exactly the gap I built <a href="https://novaapi.lbase.com">NovaAPI</a> for: a gateway that gives you the <strong>same DeepSeek models (V4.1 line included)</strong> through a normal international flow — sign up with any email, pay with <strong>PayPal or USDT</strong>, no Chinese phone number anywhere. It also aggregates Claude-compatible endpoints, so Claude Code talks to it natively. (Full disclosure: this is my project — but the tutorial below works for any OpenAI/Anthropic-compatible gateway.)</p>

@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NovaAPI Blog — Guides for Frontier Chinese AI</title>
-<meta name="description" content="Blog of NovaAPI: guides and updates for developers using DeepSeek and frontier Chinese AI models from anywhere in the world.">
-<link rel="canonical" href="https://novaapi.lbase.com/blog/index.html">
-<link rel="icon" type="image/png" href="../logo.png">
-<style>
+
   :root {
     --bg: #0b0e14; --bg-soft: #11161f; --card: #151b26; --border: #232c3b;
     --text: #e6eaf2; --text-dim: #9aa5b8; --accent: #4f8cff; --green: #3ddc97;
@@ -53,50 +44,3 @@
   footer a { color: var(--text-dim); }
   .tag { display: inline-block; color: var(--accent); font-size: 12px; margin-right: 10px; }
   @media (max-width: 640px) { .nav-links a.hide-m { display: none; } main h1 { font-size: 24px; } }
-
-  main table { width: 100%; border-collapse: collapse; margin: 16px 0 22px; font-size: 14px; }
-  main table th, main table td { border: 1px solid var(--border); padding: 9px 14px; text-align: left; color: var(--text-dim); }
-  main table th { background: var(--bg-soft); color: var(--text); font-size: 13px; }
-  main table td strong, main table th strong { color: var(--text); }
-  main h4 { font-size: 15px; margin: 20px 0 6px; color: var(--text); }
-  main hr { border: none; border-top: 1px solid var(--border); margin: 30px 0; }
-  main em { color: var(--text-dim); }
-</style>
-</head>
-<body>
-<header>
-  <div class="nav">
-    <a class="brand" href="../index.html"><img src="../logo.png" alt="NovaAPI logo"/>Nova<span>API</span></a>
-    <div class="nav-links">
-      <a href="../index.html">Home</a>
-      <a href="../docs.html">Docs</a>
-      <a href="index.html">Blog</a>
-      <a class="btn btn-outline" href="https://api.lbase.com/login">Log in</a>
-      <a class="btn btn-primary" href="https://api.lbase.com/register">Sign Up</a>
-    </div>
-  </div>
-</header>
-<div class="wrap">
-  <main>
-    <h1 style="margin-bottom:8px;">NovaAPI Blog</h1>
-    <p style="color:var(--text-dim); margin-bottom:30px;">Engineering notes, product updates, and guides for developers using frontier Chinese AI from anywhere in the world.</p>
-    <div class="card">
-      <div class="date">Sep 10, 2026</div>
-      <h2><a href="cut-llm-api-bill-80-percent.html">How to Cut Your LLM API Bill by ~80% Without Switching Your Tools</a></h2>
-      <p>A cost breakdown of running Claude Code and Cursor on a frontier Chinese model instead of Western flagship APIs — with real token counts, real prices, and the cases where you should NOT switch.</p>
-      <span class="tag">#ai</span><span class="tag">#claude</span><span class="tag">#api</span><span class="tag">#tutorial</span>
-    </div>
-    <div class="card">
-      <div class="date">Sep 10, 2026</div>
-      <h2><a href="deepseek-v4-1-flash-claude-code.html">DeepSeek V4.1 Flash Is Here — and You Can Use It From Claude Code Today</a></h2>
-      <p>V4.1 Flash is rolling out with V4 Pro-beating performance at a lower price — and DeepSeek is auto-routing pro traffic to it. Here's how developers outside China can use it from Claude Code, Cursor, or any OpenAI-compatible client in about 5 minutes.</p>
-      <span class="tag">#deepseek</span><span class="tag">#claude</span><span class="tag">#tutorial</span>
-    </div>
-  </main>
-</div>
-<footer>
-  <div>NovaAPI — a product of <a href="https://lbase.com">L-Base</a></div>
-  <div style="margin-top:6px;"><a href="https://novaapi.lbase.com/">Product</a> · <a href="https://api.lbase.com/login">Console</a> · <a href="mailto:hello@lbase.com">hello@lbase.com</a></div>
-</footer>
-</body>
-</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Endpoint, Your Whole Toolchain: Running Chinese Frontier Models in Claude Code, Cursor, Cline, Aider and More</title>
+<meta name="description" content="Copy-paste configuration for putting DeepSeek V4.1 (or any OpenAI/Anthropic-compatible Chinese model) behind every AI coding tool you use — plus the three gotchas that waste the most time.">
+<link rel="canonical" href="https://novaapi.lbase.com/blog/one-endpoint-whole-toolchain.html">
+<link rel="icon" type="image/png" href="../logo.png">
+<style>
+  :root {
+    --bg: #0b0e14; --bg-soft: #11161f; --card: #151b26; --border: #232c3b;
+    --text: #e6eaf2; --text-dim: #9aa5b8; --accent: #4f8cff; --green: #3ddc97;
+    --code-bg: #0d1117; --code-border: #1e2636;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.7; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header { position: sticky; top: 0; z-index: 50; background: rgba(11,14,20,.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .nav { max-width: 1000px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 18px; letter-spacing: 0.3px; color: var(--text); }
+  .brand span { color: var(--accent); }
+  .brand img { width: 22px; height: 22px; border-radius: 5px; }
+  a.brand:hover { text-decoration: none; }
+  .nav-links { display: flex; gap: 22px; font-size: 14px; align-items: center; flex-wrap: wrap; }
+  .nav-links a { color: var(--text-dim); }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  .nav-links .btn { padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; border: none; }
+  .nav-links .btn-primary { background: var(--accent); color: #fff; }
+  .nav-links .btn-primary:hover { background: #3a76e8; color: #fff; }
+  .nav-links .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .nav-links .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  main h1 { font-size: 32px; line-height: 1.25; margin-bottom: 10px; }
+  .meta { color: var(--text-dim); font-size: 13.5px; margin-bottom: 30px; }
+  main h2 { font-size: 22px; margin: 44px 0 12px; padding-top: 24px; border-top: 1px solid var(--border); }
+  main h3 { font-size: 17px; margin: 26px 0 8px; }
+  main p { color: var(--text-dim); margin-bottom: 14px; }
+  main ul, main ol { color: var(--text-dim); margin: 0 0 14px 22px; }
+  main li { margin-bottom: 6px; }
+  main strong { color: var(--text); }
+  pre { background: var(--code-bg); border: 1px solid var(--code-border); border-radius: 10px; padding: 16px 18px; overflow-x: auto; margin: 14px 0 20px; }
+  code { font-family: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas, monospace; }
+  p code, li code { background: var(--bg-soft); border: 1px solid var(--border); padding: 1px 6px; border-radius: 5px; font-size: 13px; color: var(--text); }
+  pre code { background: none; border: none; padding: 0; color: #d5dce8; }
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--accent); background: var(--bg-soft); border-radius: 8px; padding: 12px 16px; margin: 16px 0; color: var(--text-dim); }
+  .card { border: 1px solid var(--border); background: var(--bg-soft); border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; }
+  .card h2 { border: none; padding: 0; margin: 0 0 6px; font-size: 19px; }
+  .card .date { color: var(--text-dim); font-size: 12.5px; margin-bottom: 8px; }
+  .card p { color: var(--text-dim); margin: 0 0 12px; font-size: 14.5px; }
+  footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; color: var(--text-dim); font-size: 13px; }
+  footer a { color: var(--text-dim); }
+  .tag { display: inline-block; color: var(--accent); font-size: 12px; margin-right: 10px; }
+  @media (max-width: 640px) { .nav-links a.hide-m { display: none; } main h1 { font-size: 24px; } }
+
+  main table { width: 100%; border-collapse: collapse; margin: 16px 0 22px; font-size: 14px; }
+  main table th, main table td { border: 1px solid var(--border); padding: 9px 14px; text-align: left; color: var(--text-dim); }
+  main table th { background: var(--bg-soft); color: var(--text); font-size: 13px; }
+  main table td strong, main table th strong { color: var(--text); }
+  main h4 { font-size: 15px; margin: 20px 0 6px; color: var(--text); }
+  main hr { border: none; border-top: 1px solid var(--border); margin: 30px 0; }
+  main em { color: var(--text-dim); }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="../index.html"><img src="../logo.png" alt="NovaAPI logo"/>Nova<span>API</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../docs.html">Docs</a>
+      <a href="index.html">Blog</a>
+      <a class="btn btn-outline" href="https://api.lbase.com/login">Log in</a>
+      <a class="btn btn-primary" href="https://api.lbase.com/register">Sign Up</a>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+  <main>
+    <h1>One Endpoint, Your Whole Toolchain</h1>
+    <div class="meta">Sep 12, 2026 · <span class="tag">#ai</span><span class="tag">#tutorial</span><span class="tag">#claude</span><span class="tag">#api</span></div>
+<p>The awkward part of using a Chinese frontier model isn't the model. It's wiring the same model into the seven different tools you already have open.</p>
+<p>This is the copy-paste version of that setup, for every client I've configured over the last few months. One endpoint, many tools. Scroll to the one you use.</p>
+<h2>First: the part that matters (base URLs)</h2>
+<p>Nearly every tool below asks for a "base URL". Getting this wrong is the #1 setup failure, and the rule is annoyingly inconsistent:</p>
+<table><thead><tr><th>Client type</th><th>What to enter</th></tr></thead><tbody>
+<tr><td>OpenAI-compatible clients (Cursor, Cline, LangChain, most GUIs)</td><td><code>https://api.lbase.com/v1</code> — <strong>with</strong> <code>/v1</code></td></tr>
+<tr><td>Claude Code / Anthropic SDK clients</td><td><code>https://api.lbase.com</code> — <strong>without</strong> <code>/v1</code> (the SDK appends <code>/v1/messages</code> itself)</td></tr>
+</tbody></table>
+<p>Put <code>/v1</code> on an Anthropic client and you'll get a 404 on <code>/v1/v1/messages</code>. That's the whole bug 90% of the time.</p>
+<h2>Claude Code</h2>
+<p>Two environment variables, no config file:</p>
+<pre><code>export ANTHROPIC_BASE_URL="https://api.lbase.com"
+export ANTHROPIC_AUTH_TOKEN="sk-your-key"
+claude</code></pre>
+<p>Want a specific model? Claude Code respects the model env var too:</p>
+<pre><code>export ANTHROPIC_MODEL="deepseek-v4-flash"     # or a claude-* name if your gateway maps them</code></pre>
+<p><strong>Tip:</strong> keep a separate shell profile (or a small wrapper script) for the cheap profile and another for the flagship one. Switching is then one command, and you stop hand-editing configs.</p>
+<h2>Cursor</h2>
+<p><code>Settings → Models → OpenAI API Key</code>, then add a custom model:</p>
+<ul>
+<li><strong>Base URL</strong>: <code>https://api.lbase.com/v1</code></li>
+<li><strong>Model name</strong>: <code>deepseek-v4-flash</code></li>
+<li>Toggle off the models you don't want shown in the picker (Cursor lists a lot of noise by default)</li>
+</ul>
+<p>Cursor is chat/completion oriented; for long agentic runs, Claude Code or Cline handle tool-call loops better on non-Anthropic models.</p>
+<h2>Cline / Roo Code (VS Code)</h2>
+<p>In the extension settings, choose <strong>OpenAI Compatible</strong>:</p>
+<ul>
+<li><strong>Base URL</strong>: <code>https://api.lbase.com/v1</code></li>
+<li><strong>API Key</strong>: your <code>sk-...</code></li>
+<li><strong>Model ID</strong>: <code>deepseek-v4-flash</code></li>
+</ul>
+<p>Cline's agentic loops are token-hungry. This is exactly where prompt caching pays off — the same system prompt and file context get re-sent every step, and on a cached-input rate the input side is nearly free.</p>
+<h2>Aider (terminal)</h2>
+<pre><code>export OPENAI_API_BASE="https://api.lbase.com/v1"
+export OPENAI_API_KEY="sk-your-key"
+aider --model openai/deepseek-v4-flash</code></pre>
+<p>Aider also supports Anthropic-style endpoints if you prefer the Claude model aliases.</p>
+<h2>Continue.dev</h2>
+<p><code>~/.continue/config.json</code>:</p>
+<pre><code>{
+  "models": [
+    {
+      "title": "DeepSeek V4.1 (NovaAPI)",
+      "provider": "openai",
+      "model": "deepseek-v4-flash",
+      "apiBase": "https://api.lbase.com/v1",
+      "apiKey": "sk-your-key"
+    }
+  ]
+}</code></pre>
+<h2>Dify / FastGPT / LangChain</h2>
+<p>All three want an OpenAI-compatible provider. Take any provider you're not using, or add a custom one:</p>
+<pre><code># LangChain
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(
+    model="deepseek-v4-flash",
+    base_url="https://api.lbase.com/v1",
+    api_key="sk-your-key",
+)</code></pre>
+<p>For Dify: <strong>Settings → Model Provider → OpenAI-API-compatible</strong>, paste the base URL and key, then add <code>deepseek-v4-flash</code> as a model name.</p>
+<h2>Desktop GUIs (Cherry Studio, ChatBox, Open WebUI)</h2>
+<p>Same pattern every time: pick "OpenAI" as the provider type, then override the API host with <code>https://api.lbase.com/v1</code>, paste the key, and fetch the model list (they'll pull whatever the endpoint exposes).</p>
+<p>One caveat with reasoning models: some GUIs render the model's <code>reasoning_content</code> field inline. That's a client rendering quirk, not a broken response — worth knowing before you file a bug.</p>
+<h2>The three gotchas that cost the most time</h2>
+<p><strong>1. Model names change under you.</strong> Providers rename models (DeepSeek turned <code>deepseek-v4-flash</code> into <code>deepseek-flash</code> the day V4.1 shipped) and start auto-routing traffic between tiers. If a tool hardcodes an old name, it breaks silently. Gateways help here because the mapping lives server-side: your client keeps sending the name it always sent.</p>
+<p><strong>2. Peak/off-peak pricing is real.</strong> If your provider bills peak windows (DeepSeek's are Mon–Fri 01:00–04:00 and 06:00–10:00 UTC, at 2x), then "the same request" costs double depending on when a batch runs. Schedule overnight jobs outside those windows; on a large batch that's a straight 50% saving with no code changes.</p>
+<p><strong>3. Caching is the biggest lever nobody configures.</strong> Cached-input rates are an order of magnitude below cache-miss rates. Agentic tools re-send a stable prefix constantly, so enabling caching changes your bill more than switching models does.</p>
+<h2>How to verify a setup in 30 seconds</h2>
+<pre><code>curl https://api.lbase.com/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk-your-key" \
+  -d '{"model":"deepseek-v4-flash","messages":[{"role":"user","content":"reply with OK"}],"max_tokens":5}'</code></pre>
+<p>A 200 with <code>"choices"</code> means your endpoint, key and model name are all fine — any client problem after that is client-side config, not the gateway.</p>
+<hr/>
+<p><em>Full disclosure: I build <a href="https://novaapi.lbase.com">NovaAPI</a>, the gateway used in these examples — OpenAI/Anthropic-compatible access to Chinese frontier models, PayPal/USDT billing. Every snippet above works with any compatible gateway; the base-URL rules and gotchas are the same regardless of which one you pick.</em></p>
+
+  </main>
+</div>
+<footer>
+  <div>NovaAPI — a product of <a href="https://lbase.com">L-Base</a></div>
+  <div style="margin-top:6px;"><a href="https://novaapi.lbase.com/">Product</a> · <a href="https://api.lbase.com/login">Console</a> · <a href="mailto:hello@lbase.com">hello@lbase.com</a></div>
+</footer>
+</body>
+</html>

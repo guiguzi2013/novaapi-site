@@ -74,7 +74,14 @@
 }
 #novaapi-home .hero p { font-size: 16.5px; color: var(--text-dim); max-width: 560px; margin: 0 0 30px; }
 #novaapi-home .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
-#novaapi-home .hero-models { margin-top: 36px; }
+#novaapi-home .hero-bonus {
+  display: inline-flex; align-items: center; gap: 9px; margin-top: 18px;
+  padding: 9px 16px; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--card); font-size: 13.5px; color: var(--text-dim); max-width: 560px;
+}
+#novaapi-home .hero-bonus strong { color: var(--text); }
+#novaapi-home .hero-bonus .hb-icon { font-size: 15px; }
+#novaapi-home .hero-models { margin-top: 30px; }
 #novaapi-home .hero-models .label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
 #novaapi-home .model-logos { display: flex; gap: 14px; flex-wrap: wrap; }
 #novaapi-home .model-chip {
@@ -283,8 +290,12 @@
       <h1>Top Chinese AI Models.<br><span class="grad">One Simple API.</span></h1>
       <p>Access frontier Chinese models like DeepSeek through a single OpenAI-compatible endpoint — also compatible with Claude Code and Anthropic SDK. Pay-as-you-go with PayPal or USDT (TRC20). No Chinese phone number, no VPN, no hassle.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://api.lbase.com/register">Get Started &mdash; Create Account</a>
+        <a class="btn btn-primary" href="https://api.lbase.com/register">Get Started &mdash; $2 Free Credit</a>
         <a class="btn btn-outline" href="#pricing">View Pricing</a>
+      </div>
+      <div class="hero-bonus">
+        <span class="hb-icon">&#127873;</span>
+        <span><strong>New accounts get $2 in free credit</strong> &mdash; no card required, so you can run real requests before paying. Top-ups start at $10.</span>
       </div>
       <div class="hero-models">
         <div class="label">Supported model families</div>
@@ -347,7 +358,7 @@
     <div class="feature">
       <div class="icon">&#128179;</div>
       <h3>PayPal &amp; USDT Billing</h3>
-      <p>Pay-as-you-go with PayPal or USDT (TRC20). No subscription required, no wasted tokens &mdash; you only pay for what you use.</p>
+      <p>Pay-as-you-go with PayPal or USDT (TRC20), from $10. No subscription required, no wasted tokens &mdash; you only pay for what you use.</p>
     </div>
     <div class="feature">
       <div class="icon">&#128176;</div>
@@ -392,6 +403,7 @@
   <h2 class="section-title">Simple, Transparent Pricing</h2>
   <p class="section-sub">Per-token pricing. Pay as you go &mdash; no subscription, no hidden fees.</p>
   <div class="pricing-note">* Final prices are shown in the console and may change as model providers update their rates.</div>
+  <div class="pricing-note" style="margin-top:6px;">&#127873; New accounts start with <strong style="color:var(--text);">$2 of free credit</strong> &mdash; enough for real test traffic. Minimum top-up is <strong style="color:var(--text);">$10</strong> via PayPal or USDT.</div>
 
   <!-- DeepSeek native models -->
   <h3 class="pricing-block-title">DeepSeek V4.1 &mdash; frontier reasoning, no Chinese account needed</h3>
@@ -454,7 +466,7 @@
     <div class="step">
       <div class="num">1</div>
       <h3>Sign up &amp; get your key</h3>
-      <p>Create an account with your email, top up with PayPal or USDT, and get your API key instantly.</p>
+      <p>Create an account with your email and <strong>$2 of free credit lands in your balance instantly</strong> &mdash; no card, no payment needed to start. When you are ready, top up from $10 with PayPal or USDT.</p>
     </div>
     <div class="step">
       <div class="num">2</div>
@@ -470,7 +482,7 @@
     </div>
   </div>
   <div style="text-align:center; margin-top: 34px;">
-    <a class="btn btn-primary" href="https://api.lbase.com/register">Create Your Free Account</a>
+    <a class="btn btn-primary" href="https://api.lbase.com/register">Create Your Free Account &mdash; $2 Credit</a>
     <a class="btn btn-outline" href="https://api.lbase.com/login" style="margin-left:10px;">I already have an account</a>
   </div>
 </section>
@@ -479,6 +491,10 @@
 <section id="faq" class="nh-sec">
   <h2 class="section-title">FAQ</h2>
   <div style="max-width:720px; margin:0 auto;">
+    <details class="nh-details">
+      <summary>Do I have to pay before I can try it?</summary>
+      <p>No. Every new account is credited with <strong>$2 of free credit</strong> the moment you sign up &mdash; create an API key and send real requests straight away. When you want more, the minimum top-up is $10 via PayPal or USDT.</p>
+    </details>
     <details class="nh-details">
       <summary>Do I need a Chinese phone number to sign up?</summary>
       <p>No. We designed NovaAPI for global developers &mdash; sign up with just an email address and pay with PayPal or USDT.</p>
